@@ -1,0 +1,27 @@
+import shutil
+import os
+from datetime import datetime
+
+# Source directory to be backed up 
+source_dir = '/path/to/source' 
+
+# Backup destination directory
+backup_dir = '/path/to/backup'
+
+# Log file
+log_file = '/path/to/backup.log'
+
+# Perform the backup
+try:
+    shutil.copytree(source_dir, backup_dir)
+    with open(log_file, 'a') as log:
+        log.write(f'Backup completed at {datetime.now()}\n')
+except Exception as e:
+    with open(log_file, 'a') as log:
+        log.write(f'Backup failed at {datetime.now()}: {str(e)}\n')
+
+
+
+Use this command to run the script, it will run every 48 hours once executed
+
+0 */48 * * * /usr/bin/python3 /path/to/backup_script.py
